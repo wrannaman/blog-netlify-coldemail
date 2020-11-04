@@ -1,14 +1,28 @@
-import Nav from '../components/nav'
+import Head from "next/head"
+import { Component } from 'react'
+import { attributes, react as HomeContent } from '../content/home.md';
 
-export default function IndexPage() {
-  return (
-    <div>
-      <Nav />
-      <div className="py-20">
-        <h1 className="text-5xl text-center text-accent-1">
-          Next.js + Tailwind CSS
-        </h1>
-      </div>
-    </div>
-  )
+export default class Home extends Component {
+  render() {
+    let { title, cats } = attributes;
+    return (
+      <>
+        <Head>
+          <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+        </Head>
+        <article>
+          <h1>{title}</h1>
+          <HomeContent />
+          <ul>
+            {cats.map((cat, k) => (
+              <li key={k}>
+                <h2>{cat.name}</h2>
+                <p>{cat.description}</p>
+              </li>
+            ))}
+          </ul>
+        </article>
+      </>
+    )
+  }
 }
